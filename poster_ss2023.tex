@@ -1,0 +1,103 @@
+\documentclass[portrait,final,a0paper,fontscale=0.3]{baposter}
+
+%% read in constants, custom functions and used packages
+\input{functions/packages}
+
+\begin{document}
+
+\begin{poster}%
+	% Poster Options
+	{
+		% Show grid to help with alignment
+		grid=false,
+		% Number of columns and column spacing
+		columns=3,
+		colspacing=1em,
+		% Color style
+		bgColorOne=white,
+		borderColor=iftuccolor,
+		headerColorOne=iftucbackground,
+		headerFontColor=iftucfont,
+		boxColorOne=white,
+		% Format of textbox
+		textborder=rounded,
+		textfont=\small,
+		% Format of text header
+		eyecatcher=true,
+		headerborder=closed,
+		headerheight=0.1\textheight,
+		%  textfont=\sc, An example of changing the text font
+		headershape=rounded,
+		headershade=plain,
+		headerfont=\Large\bf, %Sans Serif
+		% textfont={\setlength{\parindent}{1.5em}},
+		boxshade=plain,
+		%  background=shade-tb,
+		background=plain,
+		linewidth=2pt
+	}
+	% University logo
+	{\includegraphics[height=6.5em]{tuckhseng_color}} 
+	% Title
+	{\bf\Large{Dynamic and adaptive body schema by learning to predict the sensory consequences of actions}\vspace{1em}}
+	% Authors
+	{\large Erik~Syniawa, Valentin~Forch and Fred~Hamker \\ \vspace{0.5em}
+	\small Contact: erik.syniawa@informatik.tu-chemnitz.de
+	}
+	% Department logo and other logos
+	{	
+		\begin{minipage}[r]{0.1\textwidth}
+			\includegraphics[height=6.5em]{active_self_logo_color}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[r]{0.1\textwidth}
+			\includegraphics[height=6.5em]{TUC_AI_color}
+		\end{minipage}
+		
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use height in headerbox to align multiple boxes 
+% height= <size in percent of column height>, else [auto]%
+\headerbox{Overview}{name=overview,column=0,row=0, span=3}{
+	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
+		Kurze Zusammenfassung unseres Modelles (?)
+		\begin{enumerate}\compresslist
+			\item Motorisches Lernen mit dem Basalganglien
+			\item Populationcodes lernen
+			\item Mein Motorisches Modell (noch zu implementieren)
+		\end{enumerate}
+		See \cite{vitayANNarchyCodeGeneration2015} for additional information.
+	\end{adjustbox}
+	
+	\vspace{0.3em}
+}
+
+\headerbox{Population codes}{name=pop, column=2, below=overview, span=1, height=0.25}{
+	Hier was zu dieser Veröffentlichung \cite{pougetComputationalPerspectiveNeural2002}.
+	
+	\vspace{0.3em}
+	\includegraphics[width=0.95\linewidth]{pop_code_figure}
+}
+
+\headerbox{Experiment}{name=exp, column=0, below=overview, span=2, height=0.25}{
+	Versuchsbeschreibung
+}
+
+\headerbox{References}{name=refs, column=0, above=bottom, span=3}{
+	\compressbib{\printbibliography[heading=none]}
+}
+
+\headerbox{Results}{name=res, column=1, below=exp, above=refs , span=2}{
+	Bla
+
+}
+
+\headerbox{Model}{name=model, column=0, below=exp, above=refs , span=1}{
+
+}
+
+\end{poster}
+
+
+\end{document}
