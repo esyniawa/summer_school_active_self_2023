@@ -18,31 +18,33 @@
 
 \begin{document}
 	\begin{tikzpicture}[
-		declare function = {mu1=15;},
-		declare function = {mu2=75;},
-		declare function = {sigma1=1;},
-		declare function = {sigma2=10;},
+		declare function = {mu1=20;},
+		declare function = {mu2=-20;},
+		declare function = {sigma1=12;},
+		declare function = {sigma2=4;},
 		declare function = {normal(\m,\s)=exp(-(x-\m)^2/(2*\s^2));},
 		declare function = {bivar(\ma,\sa,\mb,\sb)=
 			exp(-((x-\ma)^2/\sa^2 + (y-\mb)^2/\sb^2))/2;}]
 		\begin{axis}[
 			colormap name  = whitered,
 			width          = 15cm,
-			view           = {45}{30},
+			view           = {40}{30},
 			enlargelimits  = false,
 			grid           = major,
-			domain         = 1:19,
-			y domain       = 20:120,
+			domain         = -45:45,
+			y domain       = -45:45,
+			xtick		   = {-45,-30,-15,0,15,30,45},
+			ytick		   = {-45,-30,-15,0,15,30,45},
 			samples        = 18,
-			xlabel         = \LARGE Neuron Tactile,
-			ylabel         = \LARGE Elbow Angle in °,
-			zlabel         = {\LARGE Activation}
+			xlabel         = \huge Eye Position in °,
+			ylabel         = \huge Joint Angle in °,
+			zlabel         = {\huge Activity}
 			]
 			\addplot3 [surf] {bivar(mu1,sigma1,mu2,sigma2)};
-			\addplot3 [domain=1:19,samples=10, samples y=1, thick, smooth]
-			(x,120,{normal(mu1,sigma1)});
-			\addplot3 [domain=20:120, samples=10, samples y=1, thick, smooth]
-			(1,x,{normal(mu2,sigma2)});
+			\addplot3 [domain=-45:45,samples=15, samples y=1, thick, smooth]
+			(x,45,{normal(mu1,sigma1)});
+			\addplot3 [domain=-45:45, samples=18, samples y=1, thick, smooth]
+			(-45,x,{normal(mu2,sigma2)});
 			
 		\end{axis}
 	\end{tikzpicture}

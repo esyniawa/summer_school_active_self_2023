@@ -1,4 +1,4 @@
-\documentclass[portrait,final,a0paper,fontscale=0.31]{baposter}
+\documentclass[portrait,final,a0paper,fontscale=0.33]{baposter}
 
 %% read in constants, custom functions and used packages
 \input{functions/packages}
@@ -65,7 +65,7 @@
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 	Systems-level approach to develop a body schema and agency:
 	
-	\begin{minipage}[r]{0.6\textwidth}
+	\begin{minipage}[l]{0.4\textwidth}
 		\begin{itemize}
 		\item The \textbf{basal ganglia} will select an action based on the desired state (see \cite{baladronHabitLearningHierarchical2020}).
 		\item The \textbf{central pattern generator} will be execute the action (see \cite{nassourConcreteActionRepresentation2020}).
@@ -73,11 +73,14 @@
 		\item The \textbf{prediction error} will be used to improve the prediction and to train action selection in the \textbf{basal ganglia}.
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[r]{0.1\textwidth}
-	\end{minipage}
-	\begin{minipage}[l]{0.4\textwidth}
+	\begin{minipage}[r]{0.35\textwidth}
 		\raggedleft
-		\includegraphics[width=0.8\linewidth]{model}
+		\includegraphics[width=0.8\linewidth]{interplay_bs_motor.png}
+		\captionof{figure}{babbas}
+	\end{minipage}
+	\begin{minipage}[r]{0.25\textwidth}
+		\raggedright
+		\includegraphics[width=0.8\linewidth]{robot_setup}
 		\captionof{figure}{babbas}
 	\end{minipage}
 	\end{adjustbox}
@@ -85,21 +88,81 @@
 	\vspace{0.3em}
 }
 
-\headerbox{\large Recurrent Basis Functions\textsuperscript{1}}{name=rbf, column=0, below=overview, span=2, height=0.3}{
-	
+\headerbox{\large Sensory Integration\textsuperscript{1}}{name=rbf, column=0, below=overview, span=2, height=0.3}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
-		Hier was zu dieser Veröffentlichung \cite{pougetComputationalPerspectiveNeural2002}.
+		\textbf{\small Recurrent Basis Functions (RBF):} \\
+		RBF have been proposed as a model for multisensory integration and transformation between these frames of reference \parencite{pougetComputationalPerspectiveNeural2002}. Figure 2 shows an example where the position of the eyes and a joint are used to predict the position of a stimulus in retinocentric coordinates and vice versa.
 	
-		\vspace{0.3em}
+		\vspace{1em}
 		\begin{center}
-			\includegraphics[width=0.9\linewidth]{pop_code_figure}
-			\captionof{figure}{babbas}
+			\includegraphics[width=0.8\linewidth]{pop_code_figure}
+			\captionof{figure}{Representation of a RBF population code}
 		\end{center}
 	\end{adjustbox}
 }
 
 \headerbox{\large Learning a Body Schema\textsuperscript{1}}{name=network, column=2, below=overview, span=4, height=0.3}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
+	% Network definitions
+	\begin{minipage}[l]{0.30\textwidth}
+		\textbf{Rate-coded Neural Network:}
+		
+		Our network simulates neural activity in continuous time and is driven by unsupervised (anti-)Hebbian learning \parencite{}. Excitatory neurons learn to represent the statistical features of their inputs while
+		inhibitory interneurons decorrelate the excitatory responses leading to a sparse neural code. \\
+		
+		\textbf{Neuron Model:} \\
+		\footnotesize
+		$$\tau^{m} \frac{d m_{j} }{d t} + m_{j} = \sum_{j}{w_{ij} \cdot r_{i} } - \sum_{k}{c_{kj} \cdot r_{k} }$$
+		 
+		$$\tau^{\theta} \frac{d \theta_{j} }{d t} + \epsilon \cdot sign(\theta_{j}) = (r_{j} - r_{Target})$$
+		
+		$$r_{j} = \left[\alpha \left(\frac{2}{1 + e^{-\beta(m_{j}-\theta_{j})}} -1 \right) \right]^{+}$$
+
+	\end{minipage}
+	\hfill
+	% Network Architecture
+	\begin{minipage}[r]{0.3\textwidth}
+
+		\begin{center}
+			\includegraphics[width=0.8\linewidth]{net}
+			\captionof{figure}{Network Architecture}
+		\end{center}
+		
+		\vspace{10pt}
+		
+		\textbf{Synaptic Learning Rules:} \\
+		
+		\textit{Excitatory:} 
+		\footnotesize
+		$$\tau^{ w }\frac{ dw_{ ij } }{ dt } = (r_{ i }-\hat r_{ i }) \cdot r_{j}-\alpha^{w}_{j}r^{2}_{j}w_{ij}$$
+
+		$$\tau^{ \alpha }\frac{ d \alpha^{w}_{j}}{ dt } = \left( \left[ r_{j} - \gamma\right]^{+} \right)^{2} - \alpha^{w}_{j} \text{  with:  }  w_{ij} = \left[w_{ij} \right]^{+}$$
+		
+		
+	\end{minipage}
+	\hfill
+	% Network Results
+	\begin{minipage}[r]{0.33\textwidth}
+		\textit{Inhibitory}:
+		\footnotesize
+		$$\tau^{ c }\frac{ dc_{ kj } }{ dt } = r_{ k } \cdot r_{ j } -\alpha^{c}_{j}r_{j}c_{kj}
+		\text{  with:  }  c_{kj} = \left[w_{kj} \right]^{+}$$
+		
+		\vspace{5pt}
+		\small
+		\textbf{Results:} \\
+		RBF-Neurons develop receptive fields (RF) and show shifting gain
+		fields.	This behavior is also found in the cortex \parencite{pougetComputationalPerspectiveNeural2002}.
+		
+		\vspace{10pt}
+		
+		\begin{center}
+			\includegraphics[width=\linewidth]{results_valentin}
+			\captionof{figure}{Gain Fields}
+		\end{center}
+
+		\hfill
+	\end{minipage}
 
 	\end{adjustbox}
 }
@@ -119,8 +182,8 @@
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 		
 		\begin{minipage}[t]{\textwidth}
-			\footnotesize
 			\begin{multicols}{2}
+			\
 			The 3-factor learning principles are primarily determined by presynaptic and postsynaptic neuron activity, as well as the dopamine signal. \\
 			The labels high and low indicate whether the pre- and post-activity is more than or less than a given threshold (for example, mean population activity). \\
 			DA+ and DA- labels indicate if SNc activity is above or below a given threshold. A sign specifies the weight changes in the relevant projections for each combination of these criteria (+,, no sign). Table S8 contains the real mathematical explanation of plasticity, in addition to the general description offered. 
@@ -131,7 +194,7 @@
 	
 		\begin{minipage}[r]{0.48\textwidth}
 			\raggedleft
-			\includegraphics[width=\linewidth]{BGresize}
+			\includegraphics[width=\linewidth]{BG}
 			\captionof{figure}{Modeling of segregated \\ basal ganglia pathways}
 		\end{minipage}
 		\hfill
@@ -144,7 +207,6 @@
 }
 
 \headerbox{\large Motor Learning with the Basal Ganglia\textsuperscript{2}}{name=motor, column=3, below=network, above=refs , span=3}{
-	
 	\begin{minipage}[l]{0.35\textwidth}
 		\includegraphics[width=0.9\linewidth]{movement}
 		\vfill
@@ -156,15 +218,13 @@
 	\end{minipage}
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 			
-		\begin{minipage}[b]{\textwidth}
-			\begin{multicols}{2}
-			The 3-factor learning principles are primarily determined by presynaptic and postsynaptic neuron activity, as well as the dopamine signal. \\
-			The labels high and low indicate whether the pre- and post-activity is more than or less than a given threshold (for example, mean population activity). \\
-			DA+ and DA- labels indicate if SNc activity is above or below a given threshold. 
-			\end{multicols}
+		\begin{minipage}[b]{0.35\textwidth}
+			A goal position (\textbf{black}) has to be reached from a starting position (\textcolor{red}{red}). 
+		\end{minipage}
+		\begin{minipage}[b]{0.65\textwidth}
+	This goal informs both, amotor cortex-basalganglia loop and the cerebellum. The motor cortex-basal ganglia loop selects aconcrete action, which determines the parameters of the CPG in the brainstem. Learning occurs when an achieved hand position is novel through dopamine-modulated Hebbian plasticity that reinforces the association between the executed action and the reached hand position.
 		\end{minipage}
 	
-		
 	\end{adjustbox}
 
 	
