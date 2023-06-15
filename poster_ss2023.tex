@@ -39,7 +39,7 @@
 	% University logo
 	{\includegraphics[height=6.5em]{tuckhseng_color}} 
 	% Title
-	{\bf\Large{Developing a body schema by multi-sensory integration thought recurrent basis functions and motor learning in the basal ganglia}\vspace{1em}}
+	{\bf\Large{Developing a body schema by multi-sensory integration \\thought recurrent basis functions and the contribution of the basal ganglia to motor learning}\vspace{1em}}
 	% Authors
 	{\large Erik~Syniawa\textsuperscript{2}, Valentin~Forch\textsuperscript{1} and Fred~Hamker \\ \vspace{0.5em}
 	\small Contact: erik.syniawa@informatik.tu-chemnitz.de \\
@@ -76,9 +76,9 @@
 	\end{minipage}
 	\hfill
 	\begin{minipage}[r]{0.4\textwidth}
-		\raggedleft
-		\includegraphics[width=0.9\linewidth]{interplay_bs_motor.png}
-		\captionof{figure}{Schematic Overview of our model}
+		\hspace{5pt}
+		\includegraphics[width=\linewidth]{overview_model}
+		\captionof{figure}{Schematic overview of our model}
 	\end{minipage}
 	\end{adjustbox}
 }
@@ -235,10 +235,10 @@
 
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 		
-		\begin{minipage}[l]{0.35\textwidth}
+		\begin{minipage}[l]{0.37\textwidth}
 			\textbf{Reaching task:} \\
 			
-			A goal should be reached in a plane (\textcolor{green}{green}). The BG should choose the right movement trajectory (\textcolor{blue}{blue}) to get from a starting arm position (\textcolor{red}{red}) to a arm position, that is able to reach the goal (\textbf{black}) (see Figure 7).
+			A goal should be reached in a plane (\textcolor{green}{green}). The BG should choose the right movement trajectory (\textcolor{blue}{blue}) to get from a starting arm position (\textcolor{red}{red}) to a arm position, that is able to reach the goal (\textbf{black}, see Figure 7).
 			
 			\vspace{3pt}
 			
@@ -250,7 +250,6 @@
 		\hfill
 		\begin{minipage}[r]{0.65\textwidth}
 			\vspace{30pt}
-			\hspace{6pt}
 			\includegraphics[width=0.98\linewidth]{BG_Learning}
 			\captionof{figure}{}
 		\end{minipage}
@@ -260,14 +259,12 @@
 		\begin{minipage}[b]{\textwidth}
 			\begin{multicols}{2}
 			Figure 8 shows the development of the connection strengths in the different paths.
-			At first, unrewarded connections, respectively movements that do not lead to the goal, are suppressed by the indirect path. Through rewarded selections, a direct and hyperdirect path slowly works its way out.
+			At first, unrewarded connections, respectively movements that do not lead to the goal, are suppressed by the indirect path. Through rewarded selections, a direct and hyperdirect path slowly works its way out.\\
 			The direct pathway inhibits a neuron associated with rewards in the SNr, while the hyperdirect pathway specifically excites neurons encoding alternative motor actions in the SNr. This results in the activity of only one neuron in the thalamus, that corresponds with the right movement.
 			\end{multicols}
 		\end{minipage}
 	
 	\end{adjustbox}
-
-	
 
 }
 
