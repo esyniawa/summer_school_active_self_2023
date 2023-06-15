@@ -39,10 +39,11 @@
 	% University logo
 	{\includegraphics[height=6.5em]{tuckhseng_color}} 
 	% Title
-	{\bf\Large{Dynamic and adaptive body schema by learning to predict the sensory consequences of actions}\vspace{1em}}
+	{\bf\Large{Developing a body schema by multi-sensory integration thought recurrent basis functions and motor learning in the basal ganglia}\vspace{1em}}
 	% Authors
 	{\large Erik~Syniawa\textsuperscript{2}, Valentin~Forch\textsuperscript{1} and Fred~Hamker \\ \vspace{0.5em}
-	\small Contact: erik.syniawa@informatik.tu-chemnitz.de
+	\small Contact: erik.syniawa@informatik.tu-chemnitz.de \\
+	\hspace{43pt} valentin.forch@informatik.tu-chemnitz.de
 	}
 	% Department logo and other logos
 	{	
@@ -63,52 +64,54 @@
 	
 	
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
-	Systems-level approach to develop a body schema and agency:
-	
-	\begin{minipage}[l]{0.5\textwidth}
-		\begin{itemize}
-		\item The \textbf{basal ganglia} will select an action based on the desired state (see \cite{baladronHabitLearningHierarchical2020}).
-		\item The \textbf{central pattern generator} will be execute the action (see \cite{nassourConcreteActionRepresentation2020}).
-		\item The \textbf{cerebellum} will learn to predict the sensory consequences of the motor action in all modalities (vision, touch, proprioception) i.e. the body schema (see \cite{schmidForwardModelsCerebellum2019}). 
-		\item The \textbf{prediction error} will be used to improve the prediction and to train action selection in the \textbf{basal ganglia}.
-		\end{itemize}
+
+	\begin{minipage}[l]{0.6\textwidth}
+		\justifying
+		\textbf{Main question:} \\		
+		How can a robot develop \textit{awareness} of its own body by associating proprioception with touch and vision using sensory consequences of motor action? \\
+		
+		\textbf{Neuro-computational model:} \\
+		Our model links \textit{sensory representations} within an integrated \textit{body schema}. Predictions and actual sensory results will be considered in the \textit{basal ganglia}. Through cortico-basal ganglia-thalamo-cortical loops the signal transmission will be modulated and dynamically influence the body schema. 
+
 	\end{minipage}
-	\begin{minipage}[r]{0.5\textwidth}
+	\hfill
+	\begin{minipage}[r]{0.4\textwidth}
 		\raggedleft
 		\includegraphics[width=0.9\linewidth]{interplay_bs_motor.png}
-		\captionof{figure}{babbas}
+		\captionof{figure}{Schematic Overview of our model}
 	\end{minipage}
-
-	
-	\vspace{0.3em}
 	\end{adjustbox}
 }
 
-\headerbox{\large Sensory Integration\textsuperscript{1}}{name=rbf, column=0, below=overview, span=2, height=0.29}{
+\headerbox{\large Sensory Integration\textsuperscript{1}}{name=rbf, column=0, below=overview, span=2, height=0.302}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 		\textbf{\small Recurrent Basis Functions (RBF):} \\
 		
-		RBF have been proposed as a model for multisensory integration and transformation between these frames of reference \parencite{pougetComputationalPerspectiveNeural2002}. \\
-		Figure 2 shows an example where the position of the eyes and a joint are used to predict the position of a stimulus in retinocentric coordinates and vice versa.
+		\justifying
+		
+		Information from different modalities is embedded within the reference frame of their coinciding sensory system. 
+		RBF have been proposed as a model for multisensory integration between these reference frames \parencite{pougetComputationalPerspectiveNeural2002}. \\
+		Figure 2 shows an example where the position of the eyes and a joint are used to predict the position of a stimulus in retinocentric coordinates.
 	
 		\vspace{1em}
 		\begin{center}
-			\includegraphics[width=0.8\linewidth]{pop_code_figure}
-			\captionof{figure}{Representation of a RBF population code}
+			\includegraphics[width=0.72\linewidth]{pop_code_figure}
+			\captionof{figure}{Schematic representation of a RBF}
 		\end{center}
 	\end{adjustbox}
 }
 
-\headerbox{\large Learning a Body Schema\textsuperscript{1}}{name=network, column=2, below=overview, span=4, height=0.29}{
+\headerbox{\large Learning a Body Schema\textsuperscript{1}}{name=network, column=2, below=overview, span=4, height=0.302}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 	% Network definitions
 	\begin{minipage}[l]{0.30\textwidth}
-		\textbf{Rate-coded Neural Network:} \\
+		\textbf{Rate-coded neural network:} \\
 		
-		Our network simulates neural activity in continuous time and is driven by unsupervised Anti-Hebbian learning \parencite{}. Excitatory neurons learn to represent the statistical features of their inputs while
-		inhibitory interneurons decorrelate the excitatory responses leading to a sparse neural code. \\
+		Our network simulates neural activity in continuous time and is driven by unsupervised Anti-Hebbian learning \parencite{teichmannLearningInvarianceNatural2012}. \\
+		Excitatory neurons learn to represent the statistical features of their inputs while inhibitory interneurons decorrelate the excitatory responses leading to a sparse neural code \parencite{foldiakFormingSparseRepresentations1990}. \\
 		
-		\textbf{Neuron Model:} \\
+		\vspace{10pt}
+		\textbf{Neuron model:} \\
 		\footnotesize
 		$$\tau^{m} \frac{d m_{j} }{d t} + m_{j} = \sum_{j}{w_{ij} \cdot r_{i} } - \sum_{k}{c_{kj} \cdot r_{k} }$$
 		 
@@ -126,7 +129,7 @@
 			\captionof{figure}{Network Architecture}
 		\end{center}
 		
-		\vspace{10pt}
+		\vspace{22pt}
 		
 		\textbf{Synaptic Learning Rules:} \\
 		
@@ -146,16 +149,15 @@
 		$$\tau^{ c }\frac{ dc_{ kj } }{ dt } = r_{ k } \cdot r_{ j } -\alpha^{c}_{j}r_{j}c_{kj}
 		\text{  with:  }  c_{kj} = \left[w_{kj} \right]^{+}$$
 		
-		\vspace{5pt}
+		\vspace{15pt}
 		\small
 		\textbf{Results:} \\
-		RBF-Neurons develop receptive fields (RF) and show shifting gain
-		fields.	This behavior is also found in the cortex \parencite{pougetComputationalPerspectiveNeural2002}.
+		RBF-Neurons develop gain fields that are shifting depending on the position of their reference frame. This behavior is also found in the cortex \parencite{pougetComputationalPerspectiveNeural2002}.
 		
 		\vspace{10pt}
 		
 		\begin{center}
-			\includegraphics[width=\linewidth]{results_valentin}
+			\includegraphics[width=0.95\linewidth]{results_valentin}
 			\captionof{figure}{Gain Fields}
 		\end{center}
 
@@ -179,7 +181,7 @@
 
 \headerbox{\large Setup}{name=setup,column=4,row=0, span=2, above=network}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
-		\vspace{10pt}
+		\vspace{1pt}
 		
 		\centering
 		\includegraphics[width=0.75\linewidth]{robot_setup}
@@ -187,35 +189,38 @@
 	\end{adjustbox}
 }
 
-\headerbox{\large Basal Ganglia\textsuperscript{2}}{name=bg, column=0, below=rbf, above=refs , span=3}{
+\headerbox{\large Synaptic plasticity in the
+	Basal Ganglia\textsuperscript{2}}{name=bg, column=0, below=rbf, above=refs , span=3}{
 	\begin{adjustbox}{minipage=0.95\textwidth, margin=5pt, center}
 		
 	
-		\begin{minipage}[r]{0.48\textwidth}
+		\begin{minipage}[l]{0.48\textwidth}
 			\textbf{Network of the Basal Ganglia (BG):}\\
 			
-			\vspace{2pt}
+			\vspace{5pt}
 			\begin{flushright}
 				\includegraphics[width=\linewidth]{BG}
 				\captionof{figure}{Modeling of segregated \\ basal ganglia pathways}
 			\end{flushright}
 
 			
-			\vspace{15pt}
+			\vspace{25pt}
+			\justifying
 			
-			Through dopamine-modulated mechanisms, the BG enable motor category learning (Seger, 2008) and are involved in establishing associations between stimulus and responses (Packard \& Knowlton, 2002). Due to the modulating effect of dopamine (DA) on the plasticity of the BG, this model acts as a kind of reinforcement learning agent. \\
+			Through \textit{dopamine-modulated plasticity}, the BG enable motor category learning \parencite{segerHowBasalGanglia2008a} and are involved in establishing associations between stimulus and responses \parencite{packardLearningMemoryFunctions2002a}. They act as a kind of reinforcement learning agent. \\
+			In our model the BG consist of 3 different pathways. All of them represent actual connections between the different nuclei of the BG (see Figure 6).
 			
-			
-			
+			\vspace{10pt}
 			
 		\end{minipage}
 		\hfill
-		\begin{minipage}[l]{0.49\textwidth}
+		\begin{minipage}[r]{0.49\textwidth}
 			\textbf{Learning in the different pathways:}\\
+			\justifying
 			
-			The learning principles are primarily determined by presynaptic and postsynaptic activity, as well as the DA-signal (see Table 1). \\
+			The learning principles are primarily determined by \textit{presynaptic} and \textit{postsynaptic} activity, as well as the \textit{Dopamine signal} (\textbf{DA}). Together these principles form a 3-factor learning rule (see Table 1, modified after \cite{maithOptimalAttentionTuning2021c}). \\
 			The labels high and low indicate whether the pre- and post-activity is more than or less than a given threshold (for example, mean population activity).
-			DA+ and DA- labels indicate if the SNc activity exceeds a given threshold or not. A sign represents the weight changes in the relevant projections for each combination.
+			DA+ and DA- labels indicate if the DA levels exceed a given threshold or not. A sign represents the weight changes in the relevant projections for each combination.
 			
 			\vspace{10pt}
 			
@@ -233,9 +238,9 @@
 		\begin{minipage}[l]{0.35\textwidth}
 			\textbf{Reaching task:} \\
 			
-			A goal should be reached in a plane (\textcolor{green}{green}). The BG should choose the right movement trajectory (\textcolor{blue}{blue}) to get from a starting arm position (\textcolor{red}{red}) to arm position to reach the goal (\textbf{black}). See Figure 7.
+			A goal should be reached in a plane (\textcolor{green}{green}). The BG should choose the right movement trajectory (\textcolor{blue}{blue}) to get from a starting arm position (\textcolor{red}{red}) to a arm position, that is able to reach the goal (\textbf{black}) (see Figure 7).
 			
-			\vspace{10pt}
+			\vspace{3pt}
 			
 			\includegraphics[width=0.9\linewidth]{movement}
 			\captionof{figure}{}
@@ -250,12 +255,13 @@
 			\captionof{figure}{}
 		\end{minipage}
 		
-		\vspace{5pt}
+		\vspace{1pt}
 			
 		\begin{minipage}[b]{\textwidth}
 			\begin{multicols}{2}
 			Figure 8 shows the development of the connection strengths in the different paths.
-			At first, unrewarded connections (e.g. movements) are suppressed by the indirect path. Through rewarded selections, a direct and hyperdirect path slowly works its way out. The direct pathway inhibits a neuron associated with rewards in the GPi, while the hyperdirect pathway specifically excites neurons encoding alternative hues in the GPi. This influences the activity of the thalamus so that only one neuron becomes active.
+			At first, unrewarded connections, respectively movements that do not lead to the goal, are suppressed by the indirect path. Through rewarded selections, a direct and hyperdirect path slowly works its way out.
+			The direct pathway inhibits a neuron associated with rewards in the SNr, while the hyperdirect pathway specifically excites neurons encoding alternative motor actions in the SNr. This results in the activity of only one neuron in the thalamus, that corresponds with the right movement.
 			\end{multicols}
 		\end{minipage}
 	

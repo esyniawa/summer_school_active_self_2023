@@ -2,7 +2,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% References paths
 \usepackage[backend=biber, style=apa, citestyle=apa]{biblatex}
 \addbibresource{refs.bib}
-\AtBeginBibliography{\small}
+% font size
+\AtBeginBibliography{\footnotesize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Image paths
 \usepackage{graphicx}
@@ -48,10 +49,10 @@
 		\setlength{\itemsep}{0pt}
 		\setlength{\parskip}{0pt}
 		\setlength{\parsep}{0pt}
-		\footnotesize}
+	}
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Table and figure settings
-\usepackage{float, booktabs,array}
+\usepackage{float, booktabs, array, ragged2e}
 
 % Adjust row width in tables 
 \renewcommand{\arraystretch}{1.1}
